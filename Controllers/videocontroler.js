@@ -401,3 +401,17 @@ module.exports.deleteCommentController = async (req, res) => {
         });
     }
 };
+
+
+module.exports.updateCommentController = async (req, res) => {
+    try {
+        const { cid } = req.params;
+        const { newcomment } = req.body;
+        await Comments.findByIdAndUpdate(cid, { text: newcomment });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Server error. Please try again later."
+        });
+    }
+}
